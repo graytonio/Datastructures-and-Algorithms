@@ -6,7 +6,7 @@ all:
 	mv Student.o ../../build/
 
 test:
-	$(CC) -o StudentTest Student.cpp StudentTest.cpp
+	$(CC) -o StudentTest Student.cpp StudentTest.cpp ../Person/Person.cpp ../Course/Course.cpp
 
 clean:
 	rm -f Student.o StudentTest

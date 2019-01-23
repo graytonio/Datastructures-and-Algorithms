@@ -1,10 +1,10 @@
 #include "Person.h"
 using namespace std;
 
-const string &Person::getName()  {
+const string Person::getName()  {
         return name;
 }
-void Person::setName(const string &name) {
+void Person::setName(const string name) {
         Person::name = name;
 }
 uint8_t Person::getAge()  {
