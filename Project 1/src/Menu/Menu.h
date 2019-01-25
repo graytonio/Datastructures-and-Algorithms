@@ -15,6 +15,7 @@ void addStudent();
 void deleteStudent();
 void addCourse();
 void deleteCourse();
+void clearConsole();
 
 public:
 Menu();

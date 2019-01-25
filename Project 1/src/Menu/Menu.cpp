@@ -10,6 +10,7 @@ Menu::Menu(Database dataPar){
 }
 
 bool Menu::printMenu(){
+        clearConsole();
         uint8_t select;
         cout << "\nPlease select one of the following:" << endl;
         cout << "[1] Print all records" << endl;
@@ -21,7 +22,6 @@ bool Menu::printMenu(){
         cout << "[7] Exit" << endl;
         cout << "Enter your selection: ";
         cin >> select;
-
         switch(select) {
         case '1':
                 printRecords();
@@ -47,11 +47,15 @@ bool Menu::printMenu(){
         default:
                 cout << select << " is not an option" << endl;
         }
+
+        cout << "Press Enter to Continue";
+        cin.ignore();
         return true;
 }
 
 void Menu::printRecords(){
-        cout << data.getRecords() << endl;
+        cout << endl << *data.getRecords();
+        cin.ignore();
 }
 
 void Menu::printSingleRecord(){
@@ -60,14 +64,32 @@ void Menu::printSingleRecord(){
         cin.ignore(numeric_limits<streamsize>::max(),'\n');
         cin >> uid;
         cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        Student* selected = data.getRecords().getStudent(uid);
-        if(selected != NULL) cout << *data.getRecords().getStudent(uid);
+        Student* selected = data.getRecords()->getStudent(uid);
+        if(selected != NULL) cout << endl << *data.getRecords()->getStudent(uid);
         else cout << "Invalid ID" << endl;
 }
 
 void Menu::addStudent(){
-        //TODO: Implement Add Student
-        cout << "Add a student" << endl;
+        Student s;
+        string input;
+        cout << "\nEnter the User ID: ";
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cin >> input;
+        s.setUID((uint32_t) stoi(input));
+
+        cout << "Enter Name: ";
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        getline(cin, input);
+        s.setName(input);
+
+        cout << "Enter Age: ";
+        cin >> input;
+        s.setAge((uint32_t) stoi(input));
+
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+
+        data.getRecords()->addStudent(s);
+        cout << "\nStudent Added" << endl;
 }
 
 void Menu::deleteStudent(){
@@ -83,4 +105,10 @@ void Menu::addCourse(){
 void Menu::deleteCourse(){
         //TODO: Implement Delete Course
         cout << "Delete a course" << endl;
+}
+
+void Menu::clearConsole(){
+        for(uint8_t i=0; i<200; i++) {
+                cout << endl;
+        }
 }

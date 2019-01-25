@@ -25,6 +25,7 @@ std::vector<Student> getStudents();
 void setStudents(std::vector<Student> students);
 
 Student* getStudent(uint32_t uid);
+void addStudent(Student student);
 
 friend std ::ostream& operator<<(std::ostream &os, const Records &r);
 };

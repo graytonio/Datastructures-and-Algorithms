@@ -2,6 +2,9 @@
 using namespace std;
 
 Student::Student() : Person(){
+        gpa = 0;
+        totalCreditHours = 0;
+        numberOfCourses = 0;
 }
 
 Student::Student(uint32_t uidPar, double gpaPar, vector<Course> coursesPar, string namePar, uint32_t agePar) : Person(namePar, agePar){

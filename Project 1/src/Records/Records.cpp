@@ -41,6 +41,11 @@ Student* Records::getStudent(uint32_t uid){
         return NULL;
 }
 
+void Records::addStudent(Student student){
+        //TODO: Add unique ID check
+        students.push_back(student);
+}
+
 ostream& operator << (ostream& os, const Records &r){
         os << "Number Of Students: " << r.numberOfStudents << "\nAverage GPA: " << r.averageGPA << "\nStudents: ";
         for(Student s : r.students) {

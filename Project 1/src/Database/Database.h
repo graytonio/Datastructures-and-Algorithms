@@ -24,7 +24,7 @@ void setPathStudents(std::string path);
 std::string getPathCourses();
 void setPathCourses(std::string path);
 
-Records getRecords();
+Records* getRecords();
 void setRecords(Records records);
 
 Records loadData();

@@ -26,8 +26,8 @@ void Database::setPathCourses(string path){
         Database::pathCourses = path;
 }
 
-Records Database::getRecords(){
-        return records;
+Records* Database::getRecords(){
+        return &records;
 }
 
 void Database::setRecords(Records records){
