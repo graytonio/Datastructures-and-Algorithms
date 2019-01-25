@@ -6,25 +6,27 @@
 
 class Records {
 private:
-  uint32_t numberOfStudents;
-  double averageGPA;
-  std::vector<Student> students;
-  void processStudents();
+uint32_t numberOfStudents;
+double averageGPA;
+std::vector<Student> students;
+void processStudents();
 
 public:
-  Records();
-  Records(std::vector<Student> studentsPar);
+Records();
+Records(std::vector<Student> studentsPar);
 
-  uint32_t getNumberOfStudents();
-  void setNumberOfStudents(uint32_t numberOfStudents);
+uint32_t getNumberOfStudents();
+void setNumberOfStudents(uint32_t numberOfStudents);
 
-  double getAverageGPA();
-  void setAverageGPA(double averageGPA);
+double getAverageGPA();
+void setAverageGPA(double averageGPA);
 
-  std::vector<Student> getStudents();
-  void setStudents(std::vector<Student> students);
+std::vector<Student> getStudents();
+void setStudents(std::vector<Student> students);
 
-  friend std ::ostream& operator<<(std::ostream &os, const Records &r);
+Student* getStudent(uint32_t uid);
+
+friend std ::ostream& operator<<(std::ostream &os, const Records &r);
 };
 
 #endif

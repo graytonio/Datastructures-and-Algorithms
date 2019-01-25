@@ -34,6 +34,13 @@ void Records::setStudents(vector<Student> students){
         Records::students = students;
 }
 
+Student* Records::getStudent(uint32_t uid){
+        for(uint32_t i = 0; i < students.size(); i++) {
+                if(students.at(i).getUID() == uid) return &students.at(i);
+        }
+        return NULL;
+}
+
 ostream& operator << (ostream& os, const Records &r){
         os << "Number Of Students: " << r.numberOfStudents << "\nAverage GPA: " << r.averageGPA << "\nStudents: ";
         for(Student s : r.students) {

@@ -44,5 +44,5 @@ Course::Course(string codePar, string titlePar, double gradePar, uint8_t creditP
 }
 
 ostream& operator << (ostream& os, const Course &c){
-        os << "Code: " << c.code << "\nTitle: " << c.title << "\nGrade: " << c.grade << "\nCredit Hours: " << unsigned(c.creditHour) << endl;
+        os << "\tCode: " << c.code << "\n\tTitle: " << c.title << "\n\tGrade: " << c.grade << "\n\tCredit Hours: " << unsigned(c.creditHour) << endl;
 }

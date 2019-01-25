@@ -49,6 +49,7 @@ vector<Course> Student::getCourses(){
 
 void Student::setCourses(vector<Course> courses){
         Student::courses = courses;
+        calculateCourses();
 }
 
 void Student::addCourse(Course newCourse){
@@ -63,13 +64,30 @@ void Student::deleteCourse(uint8_t index){
 
 void Student::calculateCourses(){
         numberOfCourses = courses.size();
+        gpa = 0;
         uint32_t credits = 0;
         for(Course c : courses) {
                 credits += c.getCreditHour();
+                double grade = c.getGrade();
+                if(grade>=90 && grade<=100) {
+                        gpa+= 4 * c.getCreditHour();
+                } else if(grade>=80 && grade<=89) {
+                        gpa+= 3 * c.getCreditHour();
+                } else if(grade>=70 && grade<=79) {
+                        gpa+= 2 * c.getCreditHour();
+                } else if(grade>=60 && grade<=79) {
+                        gpa+= 1 * c.getCreditHour();
+                }
+
         }
         totalCreditHours = credits;
+        gpa /= totalCreditHours;
 }
 
 ostream& operator << (ostream& os, Student &s){
-        os << "Name: " << s.getName() << "\nAge: " << unsigned(s.getAge()) << "\nCredit Hours: " << s.totalCreditHours << "\nNumber of Courses: " << s.numberOfCourses << "\nStudent ID: " << s.uid << "\nGPA: " << s.gpa << endl;
+        os << "Name: " << s.getName() << "\nAge: " << unsigned(s.getAge()) << "\nCredit Hours: " << s.totalCreditHours << "\nNumber of Courses: " << s.numberOfCourses << "\nStudent ID: " << s.uid << "\nGPA: " << s.gpa << "\nCourses: ";
+        for(Course c : s.courses) {
+                os << "\n" << c;
+        }
+        os << endl;
 }

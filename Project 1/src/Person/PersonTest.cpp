@@ -12,8 +12,11 @@ int main(){
         p.setAge(24);
         cout<<p;
 
-        p.setName("Noah Dickwad");
+        p.setName("Noah Smith");
         cout<<p;
+
+        Person p2("Jane Doeberman", 24);
+        cout << p2;
 
         return 0;
 }
