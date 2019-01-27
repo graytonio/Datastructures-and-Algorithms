@@ -9,6 +9,8 @@
 class Menu {
 private:
 Database data;
+
+//Functions for each menu option
 void printRecords();
 void printSingleRecord();
 void addStudent();
@@ -19,8 +21,11 @@ void clearConsole();
 bool isNumber(std::string s);
 
 public:
+//Constructors
 Menu();
 Menu(Database dataPar);
+
+//Print menu and send user to appropriate function
 bool printMenu();
 };
 
