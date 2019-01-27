@@ -1,6 +1,6 @@
 OUTPUTDIR = build
 SRCDIR = src
-EXECUTABLE = main
+EXECUTABLE = Project1
 
 all:
 	g++ -c -o $(OUTPUTDIR)/Project1.o $(SRCDIR)/Project1.cpp
@@ -19,3 +19,4 @@ $(SUBDIRS):
 
 clean:
 	rm -f build/*
+	rm Project1

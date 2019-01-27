@@ -7,6 +7,7 @@ all:
 
 test:
 	$(CC) -o DatabaseTest Database.cpp DatabaseTest.cpp ../Student/Student.cpp ../Person/Person.cpp ../Course/Course.cpp ../Records/Records.cpp
+	mv DatabaseTest ../../tests/
 
 clean:
 	rm -f Records.o RecordsTest

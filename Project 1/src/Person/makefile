@@ -7,6 +7,7 @@ all:
 
 test:
 	$(CC) -o PersonTest Person.cpp PersonTest.cpp
+	mv PersonTest ../../tests/
 
 clean:
 	rm -f Person.o PersonTest

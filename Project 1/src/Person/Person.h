@@ -6,7 +6,7 @@
 #include <string>
 
 class Person {
-private:
+protected:
 std::string name;
 uint8_t age;
 

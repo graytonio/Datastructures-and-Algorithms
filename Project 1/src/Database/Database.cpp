@@ -1,95 +1,107 @@
 #include "Database.h"
 using namespace std;
 
+//Default Constructor
 Database::Database(){
 }
 
+//Base Constructor
 Database::Database(string pathStudentsPar, string pathCoursesPar){
         pathStudents = pathStudentsPar;
         pathCourses = pathCoursesPar;
-        records = loadData();
+        records = loadData(); //Load the Data from the file paths passed into the constructor
 }
 
+//Student File Path Getter
 string Database::getPathStudents(){
         return pathStudents;
 }
 
+//Student File Path Setter
 void Database::setPathStudents(string path){
         Database::pathStudents = path;
 }
 
+//Courses File Path Getter
 string Database::getPathCourses(){
         return pathCourses;
 }
 
+//Courses File Path Setter
 void Database::setPathCourses(string path){
         Database::pathCourses = path;
 }
 
+//Records Object Getter
 Records* Database::getRecords(){
         return &records;
 }
 
+//Records Object Setter
 void Database::setRecords(Records records){
         Database::records = records;
 }
 
+//Function for reading and parsing the data into memory
 Records Database::loadData(){
-        vector<Student> students;
-        vector<Course> courses;
-        ifstream inputFile(pathStudents);
-        Student tempStudent;
+        vector<Student> students; //Vector for holding Student Records
+        vector<Course> courses; //Vector for holding Course REcords
+        Student tempStudent; //Temporary holding container for each record in csv file
         string cell; //Temporary holding variable for each value in the csv record
-        while(getline(inputFile, cell, ',')) {
-                tempStudent.setUID((uint32_t) stoi(cell));
 
-                getline(inputFile, cell, ',');
-                tempStudent.setName(cell);
+        ifstream inputFile(pathStudents); //Read in student csv file
 
-                getline(inputFile, cell, ',');
-                tempStudent.setAge((uint32_t) stoi(cell));
+        while(getline(inputFile, cell, ',')) { //Read the line up to a comma and store it into the holding variable
+                tempStudent.setUID((uint32_t) stoi(cell)); //Set the temp student UID to the read value
 
-                getline(inputFile, cell, ',');
-                tempStudent.setTotalCreditHours((uint32_t) stoi(cell));
+                getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
+                tempStudent.setName(cell); //Set the temp student Name to the read value
 
-                getline(inputFile, cell, ',');
-                tempStudent.setNumberOfCourses((uint32_t) stoi(cell));
+                getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
+                tempStudent.setAge((uint32_t) stoi(cell)); //Set the temp student age to the read value
 
-                getline(inputFile, cell);
-                tempStudent.setGPA((double) stod(cell));
+                getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
+                tempStudent.setTotalCreditHours((uint32_t) stoi(cell)); //Set the temp student credit hours to the read value
 
-                students.push_back(tempStudent);
+                getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
+                tempStudent.setNumberOfCourses((uint32_t) stoi(cell)); //Set the temp student number of courses to the read value
+
+                getline(inputFile, cell); //Read the rest of the line up to carriage return
+                tempStudent.setGPA((double) stod(cell)); //Set the temp student gpa to the read value
+
+                students.push_back(tempStudent); //Push a copy of the temp student object to the vector
         }
 
-        ifstream inputCourse(pathCourses);
-        Course tempCourse;
-        Student *currentStudent = NULL;
-        while(getline(inputCourse, cell, ',')) {
-                for(vector<Student>::iterator i = students.begin(); i != students.end(); i++) {
-                        Student s = (*i);
-                        if(s.getUID() == (uint32_t) stoi(cell)) {
-                                currentStudent = &(*i);
-                                break;
+        Course tempCourse; //Temp Course object to build each course record
+        Student *currentStudent = NULL; //Student pointer to update the student records already in the student vector
+
+        ifstream inputCourse(pathCourses); //Read the courses information
+        while(getline(inputCourse, cell, ',')) { //Read the line up to a comma
+
+                for(vector<Student>::iterator i = students.begin(); i != students.end(); i++) { //Iterate through the vector
+                        if((*i).getUID() == (uint32_t) stoi(cell)) { //If the read value for the UID matches a record in the students vector
+                                currentStudent = &(*i); //Set the student pointer to point at the student in the vector
+                                break; //Break the loop
                         }
                 }
 
-                getline(inputCourse, cell, ',');
-                tempCourse.setCode(cell);
+                getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
+                tempCourse.setCode(cell); //Set the temp Course code to the read value
 
-                getline(inputCourse, cell, ',');
-                tempCourse.setTitle(cell);
+                getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
+                tempCourse.setTitle(cell); //Set the temp Course title to the read value
 
-                getline(inputCourse, cell, ',');
-                tempCourse.setCreditHour((uint8_t) stoi(cell));
+                getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
+                tempCourse.setCreditHour((uint8_t) stoi(cell)); //Set the temp Course credit hour to the read value
 
-                getline(inputCourse, cell);
-                tempCourse.setGrade(stod(cell));
+                getline(inputCourse, cell); //Read the rest of the line
+                tempCourse.setGrade(stod(cell)); //Set the temp course to the read value
 
-                currentStudent->addCourse(tempCourse);
+                currentStudent->addCourse(tempCourse); //Push the temp course to the student in the vector
         }
 
-        Records r(students);
-        return r;
+        Records r(students); //Create a Records object with the resulting students vector
+        return r; //Return the Records Object
 }
 
 //TODO: Create Save Data Function Implementation

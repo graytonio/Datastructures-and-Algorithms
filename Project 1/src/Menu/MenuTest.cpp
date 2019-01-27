@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-        Database d("default.csv", "coursesDefaults.csv");
+        Database d("../res/default.csv", "../res/coursesDefaults.csv");
         Menu m(d);
         while(m.printMenu());
         return 0;

@@ -7,6 +7,7 @@ all:
 
 test:
 	$(CC) -o CourseTest Course.cpp CourseTest.cpp
+	mv CourseTest ../../tests/
 
 clean:
 	rm -f Course.o CourseTest

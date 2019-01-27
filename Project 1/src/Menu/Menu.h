@@ -16,6 +16,7 @@ void deleteStudent();
 void addCourse();
 void deleteCourse();
 void clearConsole();
+bool isNumber(std::string s);
 
 public:
 Menu();

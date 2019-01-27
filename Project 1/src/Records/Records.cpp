@@ -1,39 +1,47 @@
 #include "Records.h"
-#include <iostream>
 using namespace std;
 
+//Default Constructor
 Records::Records(){
 }
 
+//Base Constructor
 Records::Records(vector<Student> studentsPar){
         students = studentsPar;
-        processStudents();
+        processStudents(); //Calculate GPA, Number of Students, and Total Credit Hours
 }
 
+//Total Number of Students Getter
 uint32_t Records::getNumberOfStudents(){
         return numberOfStudents;
 }
 
+//Total Number of Students Setter
 void Records::setNumberOfStudents(uint32_t numberOfStudents){
         Records::numberOfStudents = numberOfStudents;
 }
 
+//Average GPA Getter
 double Records::getAverageGPA(){
         return averageGPA;
 }
 
+//Average GPA Setter
 void Records::setAverageGPA(double averageGPA){
         Records::averageGPA = averageGPA;
 }
 
+//Student Vector Getter
 vector<Student> Records::getStudents(){
         return Records::students;
 }
 
+//Student Vector Setter
 void Records::setStudents(vector<Student> students){
         Records::students = students;
 }
 
+//Find Student by UID and return pointer to Student Object
 Student* Records::getStudent(uint32_t uid){
         for(uint32_t i = 0; i < students.size(); i++) {
                 if(students.at(i).getUID() == uid) return &students.at(i);
@@ -41,11 +49,26 @@ Student* Records::getStudent(uint32_t uid){
         return NULL;
 }
 
+//Add Student Object to Student Vector
 void Records::addStudent(Student student){
-        //TODO: Add unique ID check
+        // TODO: Add Unique ID Check
         students.push_back(student);
 }
 
+//Find Student by UID and remove it from the vector
+Student Records::deleteStudent(uint32_t uid){
+        Student s;
+        for(uint32_t i = 0; i<students.size(); i++) {
+                if(students.at(i).getUID() == uid) {
+                        s = students.at(i);
+                        students.erase(students.begin() + i);
+                        return s;
+                }
+        }
+        return s;
+}
+
+//cout operator definition
 ostream& operator << (ostream& os, const Records &r){
         os << "Number Of Students: " << r.numberOfStudents << "\nAverage GPA: " << r.averageGPA << "\nStudents: ";
         for(Student s : r.students) {
@@ -54,11 +77,12 @@ ostream& operator << (ostream& os, const Records &r){
         os << endl;
 }
 
+//Perform processing on the student vector
 void Records::processStudents(){
-        double totalGPA = 0;
-        for(Student s : students) {
-                totalGPA += s.getGPA();
+        double totalGPA = 0; //Sum of all GPAs
+        for(Student s : students) { //For each student in the students vector
+                totalGPA += s.getGPA(); //Add the GPA to the total
         }
-        numberOfStudents = students.size();
-        averageGPA = totalGPA / numberOfStudents;
+        numberOfStudents = students.size(); //Set the Number of Students to the size of the student vector
+        averageGPA = totalGPA / numberOfStudents; //Calculate the average gpa
 }
