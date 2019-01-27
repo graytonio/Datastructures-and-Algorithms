@@ -3,6 +3,7 @@ SRCDIR = src
 EXECUTABLE = Project1
 
 all:
+	mkdir $(OUTPUTDIR)
 	g++ -c -o $(OUTPUTDIR)/Project1.o $(SRCDIR)/Project1.cpp
 	g++ -o $(OUTPUTDIR)/$(EXECUTABLE) $(OUTPUTDIR)/*.o
 	mv $(OUTPUTDIR)/$(EXECUTABLE) ./
