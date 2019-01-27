@@ -52,7 +52,7 @@ Student* Records::getStudent(uint32_t uid){
 //Add Student Object to Student Vector
 bool Records::addStudent(Student student){
         for(uint32_t i = 0; i < students.size(); i++) { //Loop through students and check for an identical UID
-                if(students.at(i).getUID() == uid) return false;
+                if(students.at(i).getUID() == student.getUID()) return false;
         }
 
         students.push_back(student); //If no duplicate push new student

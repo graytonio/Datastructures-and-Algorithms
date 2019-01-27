@@ -103,6 +103,8 @@ void Menu::addStudent(){
 
         if(data.getRecords()->addStudent(s)) cout << "\nStudent Added" << endl; //Add copy of temp Student Object to records if the student does not exist
         else cout << "\nStudent already exists" << endl; //If student already exists print error
+
+        data.saveData();
 }
 
 //Remove student from the records
@@ -116,6 +118,8 @@ void Menu::deleteStudent(){
         if(s.getName() != "NA") cout << "\n" << s.getName() << " Deleted" << endl; //If student was found say it was removed
         else cout << "\nStudent not found" << endl; //Else print the error
         cin.ignore();
+
+        data.saveData();
 }
 
 //Add a course to a student
@@ -145,6 +149,7 @@ void Menu::addCourse(){
                 if (isNumber(input)) c.setCreditHour((uint8_t) stoi(input)); //Set the temp Course Credir Hours to the input value if input is number
                 else {
                         cout << "Invalid Credit Hours Input" << endl;
+                        cin.ignore(numeric_limits<streamsize>::max(),'\n');
                         return;
                 }
 
@@ -154,6 +159,7 @@ void Menu::addCourse(){
                 if(isNumber(input)) c.setGrade(stod(input));
                 else{
                         cout << "Invalid Grade Input" << endl;
+                        cin.ignore(numeric_limits<streamsize>::max(),'\n');
                         return;
                 }
 
@@ -162,6 +168,7 @@ void Menu::addCourse(){
                 cin.ignore(numeric_limits<streamsize>::max(),'\n'); //Fixed issue with multiple cins in a row
                 cout << "Add a course" << endl;
         }else cout << "Student not found" << endl;
+        data.saveData();
 }
 
 //Remove a course from a Student
@@ -184,6 +191,8 @@ void Menu::deleteCourse(){
         }
         else cout << "Invalid UID" << endl;
         cin.ignore(numeric_limits<streamsize>::max(),'\n'); //Fixed issue with multiple cins in a row
+
+        data.saveData();
 }
 
 //Function to "Clear" the terminal window
@@ -196,7 +205,7 @@ void Menu::clearConsole(){
 //Validate that a string is a number
 bool Menu::isNumber(string s) {
         for (int i = 0; i < s.length(); i++) //For every character in the string
-                if (isdigit(s[i]) == false) //If the character is not a digit
+                if (isdigit(s[i]) == false && s[i] != '.') //If the character is not a digit
                         return false; //return false
 
         return true; //All characters are digits therefore the string is a number

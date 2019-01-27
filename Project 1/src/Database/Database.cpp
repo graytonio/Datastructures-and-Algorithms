@@ -104,4 +104,24 @@ Records Database::loadData(){
         return r; //Return the Records Object
 }
 
-//TODO: Create Save Data Function Implementation
+//Write the current student and course data to the record files
+void Database::saveData(){
+        ofstream file;
+
+        file.open(pathStudents); //Erase Student CSV
+        file.close();
+        file.open(pathCourses); //Erase Course CSV
+        file.close();
+
+        for(Student s : records.getStudents()) { //For every student
+                file.open(pathStudents, std::ios_base::app); //Append the student data to the student file
+                file << s.getUID() << "," << s.getName() << "," << unsigned(s.getAge()) << "," << s.getTotalCreditHours() << "," << s.getNumberOfCourses() << "," << s.getGPA() << "\n";
+                file.close();
+
+                file.open(pathCourses, std::ios_base::app);
+                for(Course c : s.getCourses()) { //Write a record for every course record in the student object
+                        file << s.getUID() << "," << c.getCode() << "," << c.getTitle() << "," << unsigned(c.getCreditHour()) << "," << c.getGrade() << "\n";
+                }
+                file.close();
+        }
+}
