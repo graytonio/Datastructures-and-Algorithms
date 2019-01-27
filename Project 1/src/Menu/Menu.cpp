@@ -101,8 +101,8 @@ void Menu::addStudent(){
         s.setAge((uint32_t) stoi(input)); //Set temp Student Object Age
         cin.ignore(numeric_limits<streamsize>::max(),'\n'); //Fixed issue with multiple cins in a row
 
-        data.getRecords()->addStudent(s); //Add copy of temp Student Object to records
-        cout << "\nStudent Added" << endl;
+        if(data.getRecords()->addStudent(s)) cout << "\nStudent Added" << endl; //Add copy of temp Student Object to records if the student does not exist
+        else cout << "\nStudent already exists" << endl; //If student already exists print error
 }
 
 //Remove student from the records

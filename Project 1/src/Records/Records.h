@@ -32,7 +32,7 @@ void setStudents(std::vector<Student> students);
 Student* getStudent(uint32_t uid);
 
 //Add student to students vector
-void addStudent(Student student);
+bool addStudent(Student student);
 
 //Remove Student by UID
 Student deleteStudent(uint32_t uid);
