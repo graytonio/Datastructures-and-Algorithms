@@ -10,7 +10,7 @@ Student::Student() : Person(){
 }
 
 //Base Constructor
-Student::Student(uint32_t uidPar, double gpaPar, vector<Course> coursesPar, string namePar, uint32_t agePar) : Person(namePar, agePar){
+Student::Student(uint32_t uidPar, double gpaPar, vector<Course> *coursesPar, string namePar, uint32_t agePar) : Person(namePar, agePar){
         uid = uidPar;
         gpa = gpaPar;
         courses = coursesPar;
@@ -63,14 +63,14 @@ vector<Course> Student::getCourses(){
 }
 
 //Courses Vector Setter
-void Student::setCourses(vector<Course> courses){
-        Student::courses = courses;
+void Student::setCourses(vector<Course> *courses){
+        Student::courses = *courses;
         calculateCourses(); //Re-calculate student information based on new courses vector
 }
 
 //Add a new course object to the courses vector
-void Student::addCourse(Course newCourse){
-        courses.push_back(newCourse);
+void Student::addCourse(Course *newCourse){
+        courses.push_back(*newCourse);
         calculateCourses(); //Re-calculate student information based on new courses vector
 }
 

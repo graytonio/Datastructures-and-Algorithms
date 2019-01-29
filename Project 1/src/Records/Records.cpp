@@ -6,7 +6,7 @@ Records::Records(){
 }
 
 //Base Constructor
-Records::Records(vector<Student> studentsPar){
+Records::Records(vector<Student> *studentsPar){
         students = studentsPar;
         processStudents(); //Calculate GPA, Number of Students, and Total Credit Hours
 }
@@ -37,7 +37,7 @@ vector<Student> Records::getStudents(){
 }
 
 //Student Vector Setter
-void Records::setStudents(vector<Student> students){
+void Records::setStudents(vector<Student> *students){
         Records::students = students;
 }
 
@@ -50,7 +50,7 @@ Student* Records::getStudent(uint32_t uid){
 }
 
 //Add Student Object to Student Vector
-bool Records::addStudent(Student student){
+bool Records::addStudent(Student *student){
         for(uint32_t i = 0; i < students.size(); i++) { //Loop through students and check for an identical UID
                 if(students.at(i).getUID() == student.getUID()) return false;
         }

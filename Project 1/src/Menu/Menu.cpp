@@ -7,7 +7,7 @@ Menu::Menu(){
 }
 
 //Base Constructor
-Menu::Menu(Database dataPar){
+Menu::Menu(Database *dataPar){
         data = dataPar;
 }
 

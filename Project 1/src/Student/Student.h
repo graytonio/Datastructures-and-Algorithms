@@ -40,10 +40,10 @@ void setGPA(double gpa);
 
 //Courses Vector Getter and Setter
 std::vector<Course> getCourses();
-void setCourses(std::vector<Course> courses);
+void setCourses(std::vector<Course> *courses);
 
 //Add Course to courses vector
-void addCourse(Course newCourse);
+void addCourse(Course *newCourse);
 
 //Delete Course by Course Code
 bool deleteCourse(std::string code);

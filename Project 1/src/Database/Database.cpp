@@ -43,7 +43,7 @@ void Database::setRecords(Records records){
 }
 
 //Function for reading and parsing the data into memory
-Records Database::loadData(){
+Records* Database::loadData(){
         vector<Student> students; //Vector for holding Student Records
         vector<Course> courses; //Vector for holding Course REcords
         Student tempStudent; //Temporary holding container for each record in csv file
@@ -55,6 +55,7 @@ Records Database::loadData(){
                 tempStudent.setUID((uint32_t) stoi(cell)); //Set the temp student UID to the read value
 
                 getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
+                cell.erase(remove(cell.begin(), cell.end(), '\"'), cell.end());
                 tempStudent.setName(cell); //Set the temp student Name to the read value
 
                 getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
@@ -86,9 +87,11 @@ Records Database::loadData(){
                 }
 
                 getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
+                cell.erase(remove(cell.begin(), cell.end(), '\"'), cell.end());
                 tempCourse.setCode(cell); //Set the temp Course code to the read value
 
                 getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
+                cell.erase(remove(cell.begin(), cell.end(), '\"'), cell.end());
                 tempCourse.setTitle(cell); //Set the temp Course title to the read value
 
                 getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position

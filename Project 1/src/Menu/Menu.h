@@ -23,7 +23,7 @@ bool isNumber(std::string s);
 public:
 //Constructors
 Menu();
-Menu(Database dataPar);
+Menu(Database *dataPar);
 
 //Print menu and send user to appropriate function
 bool printMenu();

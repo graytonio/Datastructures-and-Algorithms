@@ -14,7 +14,7 @@ void processStudents();
 public:
 //Constructors
 Records();
-Records(std::vector<Student> studentsPar);
+Records(std::vector<Student> *studentsPar);
 
 //Number of Students Getter and Setter
 uint32_t getNumberOfStudents();
@@ -26,13 +26,13 @@ void setAverageGPA(double averageGPA);
 
 //Student Vector Getter and Setter
 std::vector<Student> getStudents();
-void setStudents(std::vector<Student> students);
+void setStudents(std::vector<Student> *students);
 
 //Get Student Pointer by UID
 Student* getStudent(uint32_t uid);
 
 //Add student to students vector
-bool addStudent(Student student);
+bool addStudent(Student *student);
 
 //Remove Student by UID
 Student deleteStudent(uint32_t uid);
