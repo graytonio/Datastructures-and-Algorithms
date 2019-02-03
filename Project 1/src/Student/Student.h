@@ -20,7 +20,7 @@ void calculateCourses();
 public:
 //Constructor
 Student();
-Student(uint32_t uidPar, double gpaPar, std::vector<Course> coursesPar, std::string namePar, uint32_t agePar);
+Student(uint32_t uidPar, double gpaPar, std::vector<Course> *coursesPar, std::string namePar, uint32_t agePar);
 
 //Total Credit Hours Getter and Setter
 uint32_t getTotalCreditHours();

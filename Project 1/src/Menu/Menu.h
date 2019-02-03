@@ -3,6 +3,7 @@
 
 #include "../Database/Database.h"
 #include <iostream>
+#include <string>
 #include <ios>
 #include <limits>
 
@@ -23,7 +24,7 @@ bool isNumber(std::string s);
 public:
 //Constructors
 Menu();
-Menu(Database *dataPar);
+Menu(std::string studentPath, std::string coursesPath);
 
 //Print menu and send user to appropriate function
 bool printMenu();

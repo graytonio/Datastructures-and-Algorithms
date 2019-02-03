@@ -14,7 +14,7 @@ void processStudents();
 public:
 //Constructors
 Records();
-Records(std::vector<Student> *studentsPar);
+Records(std::vector<Student> studentsPar);
 
 //Number of Students Getter and Setter
 uint32_t getNumberOfStudents();

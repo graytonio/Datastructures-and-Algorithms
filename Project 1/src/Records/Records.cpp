@@ -6,7 +6,7 @@ Records::Records(){
 }
 
 //Base Constructor
-Records::Records(vector<Student> *studentsPar){
+Records::Records(vector<Student> studentsPar){
         students = studentsPar;
         processStudents(); //Calculate GPA, Number of Students, and Total Credit Hours
 }
@@ -38,7 +38,7 @@ vector<Student> Records::getStudents(){
 
 //Student Vector Setter
 void Records::setStudents(vector<Student> *students){
-        Records::students = students;
+        Records::students = *students;
 }
 
 //Find Student by UID and return pointer to Student Object
@@ -52,10 +52,10 @@ Student* Records::getStudent(uint32_t uid){
 //Add Student Object to Student Vector
 bool Records::addStudent(Student *student){
         for(uint32_t i = 0; i < students.size(); i++) { //Loop through students and check for an identical UID
-                if(students.at(i).getUID() == student.getUID()) return false;
+                if(students.at(i).getUID() == student->getUID()) return false;
         }
 
-        students.push_back(student); //If no duplicate push new student
+        students.push_back(*student); //If no duplicate push new student
         return true;
 }
 
@@ -74,7 +74,7 @@ Student Records::deleteStudent(uint32_t uid){
 
 //cout operator definition
 ostream& operator << (ostream& os, const Records &r){
-        os << "Number Of Students: " << r.numberOfStudents << "\nAverage GPA: " << r.averageGPA << "\nStudents: ";
+        os << "Number Of Students: " << r.numberOfStudents << "\nAverage GPA: " << r.averageGPA << "\nStudents: \n";
         for(Student s : r.students) {
                 os << "\n" << s;
         }

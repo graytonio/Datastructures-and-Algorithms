@@ -9,7 +9,7 @@ Database::Database(){
 Database::Database(string pathStudentsPar, string pathCoursesPar){
         pathStudents = pathStudentsPar;
         pathCourses = pathCoursesPar;
-        records = loadData(); //Load the Data from the file paths passed into the constructor
+        records = *loadData(); //Load the Data from the file paths passed into the constructor
 }
 
 //Student File Path Getter
@@ -55,7 +55,7 @@ Records* Database::loadData(){
                 tempStudent.setUID((uint32_t) stoi(cell)); //Set the temp student UID to the read value
 
                 getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
-                cell.erase(remove(cell.begin(), cell.end(), '\"'), cell.end());
+                cell.erase(remove( cell.begin(), cell.end(), '\"' ), cell.end());
                 tempStudent.setName(cell); //Set the temp student Name to the read value
 
                 getline(inputFile, cell, ','); //Read the line from the previous place up to a comma and store it into the holding variable
@@ -87,11 +87,11 @@ Records* Database::loadData(){
                 }
 
                 getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
-                cell.erase(remove(cell.begin(), cell.end(), '\"'), cell.end());
+                cell.erase(remove( cell.begin(), cell.end(), '\"' ), cell.end());
                 tempCourse.setCode(cell); //Set the temp Course code to the read value
 
                 getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
-                cell.erase(remove(cell.begin(), cell.end(), '\"'), cell.end());
+                cell.erase(remove( cell.begin(), cell.end(), '\"' ), cell.end());
                 tempCourse.setTitle(cell); //Set the temp Course title to the read value
 
                 getline(inputCourse, cell, ','); //Read the line up to a comma from the previous position
@@ -100,10 +100,10 @@ Records* Database::loadData(){
                 getline(inputCourse, cell); //Read the rest of the line
                 tempCourse.setGrade(stod(cell)); //Set the temp course to the read value
 
-                currentStudent->addCourse(tempCourse); //Push the temp course to the student in the vector
+                currentStudent->addCourse(&tempCourse); //Push the temp course to the student in the vector
         }
 
-        Records r(students); //Create a Records object with the resulting students vector
+        Records* r = new Records(students); //Create a Records object with the resulting students vector
         return r; //Return the Records Object
 }
 
@@ -118,12 +118,12 @@ void Database::saveData(){
 
         for(Student s : records.getStudents()) { //For every student
                 file.open(pathStudents, std::ios_base::app); //Append the student data to the student file
-                file << s.getUID() << "," << s.getName() << "," << unsigned(s.getAge()) << "," << s.getTotalCreditHours() << "," << s.getNumberOfCourses() << "," << s.getGPA() << "\n";
+                file << s.getUID() << ",\"" << s.getName() << "\"," << unsigned(s.getAge()) << "," << s.getTotalCreditHours() << "," << s.getNumberOfCourses() << "," << s.getGPA() << "\n";
                 file.close();
 
                 file.open(pathCourses, std::ios_base::app);
                 for(Course c : s.getCourses()) { //Write a record for every course record in the student object
-                        file << s.getUID() << "," << c.getCode() << "," << c.getTitle() << "," << unsigned(c.getCreditHour()) << "," << c.getGrade() << "\n";
+                        file << s.getUID() << ",\"" << c.getCode() << "\",\"" << c.getTitle() << "\"," << unsigned(c.getCreditHour()) << "," << c.getGrade() << "\n";
                 }
                 file.close();
         }

@@ -13,7 +13,7 @@ Student::Student() : Person(){
 Student::Student(uint32_t uidPar, double gpaPar, vector<Course> *coursesPar, string namePar, uint32_t agePar) : Person(namePar, agePar){
         uid = uidPar;
         gpa = gpaPar;
-        courses = coursesPar;
+        courses = *coursesPar;
         calculateCourses();
 }
 

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 #include "../Records/Records.h"
 #include "../Student/Student.h"
