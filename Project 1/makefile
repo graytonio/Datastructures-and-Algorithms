@@ -19,4 +19,5 @@ $(SUBDIRS):
 
 clean:
 	rm -f build/*
-	rm Project1
+	rm -f Project1
+	rm -f tests/*
