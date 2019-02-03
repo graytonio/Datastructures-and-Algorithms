@@ -1,12 +1,15 @@
 # Project 1
 
 The first project is designed to display and modify student record data
+The CSV files in the res/ directory were used during testing
+Built on Ubuntu 18.04.1 using g++ v7.3.0
 
 ### Building
 
 To build the main executable
 
 ```
+mkdir build
 make
 ```
 The executable will be available in the root directory
@@ -14,6 +17,7 @@ The executable will be available in the root directory
 To build the tests
 
 ```
+mkdir tests
 make test
 ```
 
