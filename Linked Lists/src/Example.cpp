@@ -34,7 +34,7 @@ class LinkedList{
   Node *tail = NULL;
 
 public:
-  LikedList(){}
+  LinkedList(){}
 
   void addNode(uint32_t value){
     if(head == NULL){
@@ -46,32 +46,42 @@ public:
     }
   }
 
-  void insertValue(uint32_t value, uint32_t index){
+  void insertValueAtIndex(uint32_t value, uint32_t index){
     Node *n = new Node(value);
     Node *p = head;
 
-    for(uint32_t i =0; i < index-1; i++){
-      p = p->getNext();
-      if(p == NULL) return;
-    }
+    if(index == 0){
+      n->setNext(head);
+      head = n;
+    }else{
+      for(uint32_t i =0; i < index-1; i++){
+        p = p->getNext();
+        if(p == NULL) return;
+      }
 
-    n->setNext(p->getNext());
-    p->setNext(n);
+      n->setNext(p->getNext());
+      p->setNext(n);
+    }
   }
 
   void deleteNode(uint32_t index){
     Node *p = head;
 
-    for(uint32_t i=0; i<index-1; i++){
+    for(uint32_t i=0; i<index; i++){
       p=p->getNext();
       if(p==NULL) return;
     }
 
-    Node *toDelete = p->getNext();
-    p->setNext(p->getNext()->getNext());
+    if(p == head){
+      head = p->getNext();
+      delete p;
+    }else{
+      Node *q = head;
+      while(q->getNext() != p) q = q->getNext();
 
-    toDelete=NULL;
-    delete toDelete;
+      q->setNext(p->getNext());
+      delete p;
+    }
   }
 
   uint32_t getValueAt(uint32_t index){
@@ -103,11 +113,14 @@ int main(){
   l.addNode(7);
   l.printList();
 
-  l.insertValue(4, 1);
+  l.insertValueAtIndex(4, 2);
   l.printList();
 
-  l.deleteNode(1);
-  l.printList();
+  //l.deleteNode(2);
+  //l.printList();
+
+  //l.insertValueAtIndex(5, 2);
+  //l.printList();
 
   return 0;
 }
